@@ -1,0 +1,1380 @@
+{
+  "source_dir": "data/pickplace_scripted_npz",
+  "filter": {
+    "min_len": 10,
+    "drop_top_frac": 0.1,
+    "keep_max_len": 290
+  },
+  "episodes": [
+    {
+      "file": "episode_000000.npz",
+      "src_file": "episode_000000.npz",
+      "episode_len": 74
+    },
+    {
+      "file": "episode_000001.npz",
+      "src_file": "episode_000001.npz",
+      "episode_len": 278
+    },
+    {
+      "file": "episode_000002.npz",
+      "src_file": "episode_000002.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000003.npz",
+      "src_file": "episode_000003.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000004.npz",
+      "src_file": "episode_000004.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000005.npz",
+      "src_file": "episode_000005.npz",
+      "episode_len": 63
+    },
+    {
+      "file": "episode_000006.npz",
+      "src_file": "episode_000006.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000007.npz",
+      "src_file": "episode_000007.npz",
+      "episode_len": 278
+    },
+    {
+      "file": "episode_000008.npz",
+      "src_file": "episode_000009.npz",
+      "episode_len": 73
+    },
+    {
+      "file": "episode_000009.npz",
+      "src_file": "episode_000010.npz",
+      "episode_len": 284
+    },
+    {
+      "file": "episode_000010.npz",
+      "src_file": "episode_000011.npz",
+      "episode_len": 267
+    },
+    {
+      "file": "episode_000011.npz",
+      "src_file": "episode_000012.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000012.npz",
+      "src_file": "episode_000013.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000013.npz",
+      "src_file": "episode_000014.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000014.npz",
+      "src_file": "episode_000015.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000015.npz",
+      "src_file": "episode_000016.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000016.npz",
+      "src_file": "episode_000017.npz",
+      "episode_len": 287
+    },
+    {
+      "file": "episode_000017.npz",
+      "src_file": "episode_000018.npz",
+      "episode_len": 66
+    },
+    {
+      "file": "episode_000018.npz",
+      "src_file": "episode_000019.npz",
+      "episode_len": 89
+    },
+    {
+      "file": "episode_000019.npz",
+      "src_file": "episode_000020.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000020.npz",
+      "src_file": "episode_000021.npz",
+      "episode_len": 278
+    },
+    {
+      "file": "episode_000021.npz",
+      "src_file": "episode_000022.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000022.npz",
+      "src_file": "episode_000023.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000023.npz",
+      "src_file": "episode_000024.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000024.npz",
+      "src_file": "episode_000025.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000025.npz",
+      "src_file": "episode_000026.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000026.npz",
+      "src_file": "episode_000027.npz",
+      "episode_len": 285
+    },
+    {
+      "file": "episode_000027.npz",
+      "src_file": "episode_000028.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000028.npz",
+      "src_file": "episode_000029.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000029.npz",
+      "src_file": "episode_000030.npz",
+      "episode_len": 78
+    },
+    {
+      "file": "episode_000030.npz",
+      "src_file": "episode_000031.npz",
+      "episode_len": 89
+    },
+    {
+      "file": "episode_000031.npz",
+      "src_file": "episode_000032.npz",
+      "episode_len": 205
+    },
+    {
+      "file": "episode_000032.npz",
+      "src_file": "episode_000033.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000033.npz",
+      "src_file": "episode_000034.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000034.npz",
+      "src_file": "episode_000035.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000035.npz",
+      "src_file": "episode_000036.npz",
+      "episode_len": 74
+    },
+    {
+      "file": "episode_000036.npz",
+      "src_file": "episode_000037.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000037.npz",
+      "src_file": "episode_000038.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000038.npz",
+      "src_file": "episode_000039.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000039.npz",
+      "src_file": "episode_000040.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000040.npz",
+      "src_file": "episode_000041.npz",
+      "episode_len": 289
+    },
+    {
+      "file": "episode_000041.npz",
+      "src_file": "episode_000042.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000042.npz",
+      "src_file": "episode_000043.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000043.npz",
+      "src_file": "episode_000044.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000044.npz",
+      "src_file": "episode_000045.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000045.npz",
+      "src_file": "episode_000046.npz",
+      "episode_len": 78
+    },
+    {
+      "file": "episode_000046.npz",
+      "src_file": "episode_000047.npz",
+      "episode_len": 284
+    },
+    {
+      "file": "episode_000047.npz",
+      "src_file": "episode_000049.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000048.npz",
+      "src_file": "episode_000050.npz",
+      "episode_len": 278
+    },
+    {
+      "file": "episode_000049.npz",
+      "src_file": "episode_000051.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000050.npz",
+      "src_file": "episode_000052.npz",
+      "episode_len": 83
+    },
+    {
+      "file": "episode_000051.npz",
+      "src_file": "episode_000053.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000052.npz",
+      "src_file": "episode_000055.npz",
+      "episode_len": 86
+    },
+    {
+      "file": "episode_000053.npz",
+      "src_file": "episode_000056.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000054.npz",
+      "src_file": "episode_000057.npz",
+      "episode_len": 87
+    },
+    {
+      "file": "episode_000055.npz",
+      "src_file": "episode_000058.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000056.npz",
+      "src_file": "episode_000059.npz",
+      "episode_len": 90
+    },
+    {
+      "file": "episode_000057.npz",
+      "src_file": "episode_000061.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000058.npz",
+      "src_file": "episode_000062.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000059.npz",
+      "src_file": "episode_000063.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000060.npz",
+      "src_file": "episode_000064.npz",
+      "episode_len": 275
+    },
+    {
+      "file": "episode_000061.npz",
+      "src_file": "episode_000065.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000062.npz",
+      "src_file": "episode_000066.npz",
+      "episode_len": 275
+    },
+    {
+      "file": "episode_000063.npz",
+      "src_file": "episode_000067.npz",
+      "episode_len": 87
+    },
+    {
+      "file": "episode_000064.npz",
+      "src_file": "episode_000068.npz",
+      "episode_len": 288
+    },
+    {
+      "file": "episode_000065.npz",
+      "src_file": "episode_000069.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000066.npz",
+      "src_file": "episode_000071.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000067.npz",
+      "src_file": "episode_000072.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000068.npz",
+      "src_file": "episode_000073.npz",
+      "episode_len": 279
+    },
+    {
+      "file": "episode_000069.npz",
+      "src_file": "episode_000075.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000070.npz",
+      "src_file": "episode_000076.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000071.npz",
+      "src_file": "episode_000077.npz",
+      "episode_len": 286
+    },
+    {
+      "file": "episode_000072.npz",
+      "src_file": "episode_000078.npz",
+      "episode_len": 65
+    },
+    {
+      "file": "episode_000073.npz",
+      "src_file": "episode_000079.npz",
+      "episode_len": 284
+    },
+    {
+      "file": "episode_000074.npz",
+      "src_file": "episode_000080.npz",
+      "episode_len": 282
+    },
+    {
+      "file": "episode_000075.npz",
+      "src_file": "episode_000081.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000076.npz",
+      "src_file": "episode_000082.npz",
+      "episode_len": 280
+    },
+    {
+      "file": "episode_000077.npz",
+      "src_file": "episode_000084.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000078.npz",
+      "src_file": "episode_000085.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000079.npz",
+      "src_file": "episode_000086.npz",
+      "episode_len": 277
+    },
+    {
+      "file": "episode_000080.npz",
+      "src_file": "episode_000087.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000081.npz",
+      "src_file": "episode_000088.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000082.npz",
+      "src_file": "episode_000089.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000083.npz",
+      "src_file": "episode_000090.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000084.npz",
+      "src_file": "episode_000091.npz",
+      "episode_len": 277
+    },
+    {
+      "file": "episode_000085.npz",
+      "src_file": "episode_000092.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000086.npz",
+      "src_file": "episode_000093.npz",
+      "episode_len": 275
+    },
+    {
+      "file": "episode_000087.npz",
+      "src_file": "episode_000094.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000088.npz",
+      "src_file": "episode_000097.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000089.npz",
+      "src_file": "episode_000098.npz",
+      "episode_len": 290
+    },
+    {
+      "file": "episode_000090.npz",
+      "src_file": "episode_000099.npz",
+      "episode_len": 288
+    },
+    {
+      "file": "episode_000091.npz",
+      "src_file": "episode_000100.npz",
+      "episode_len": 289
+    },
+    {
+      "file": "episode_000092.npz",
+      "src_file": "episode_000101.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000093.npz",
+      "src_file": "episode_000102.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000094.npz",
+      "src_file": "episode_000103.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000095.npz",
+      "src_file": "episode_000104.npz",
+      "episode_len": 283
+    },
+    {
+      "file": "episode_000096.npz",
+      "src_file": "episode_000105.npz",
+      "episode_len": 281
+    },
+    {
+      "file": "episode_000097.npz",
+      "src_file": "episode_000106.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000098.npz",
+      "src_file": "episode_000107.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000099.npz",
+      "src_file": "episode_000108.npz",
+      "episode_len": 288
+    },
+    {
+      "file": "episode_000100.npz",
+      "src_file": "episode_000109.npz",
+      "episode_len": 290
+    },
+    {
+      "file": "episode_000101.npz",
+      "src_file": "episode_000110.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000102.npz",
+      "src_file": "episode_000111.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000103.npz",
+      "src_file": "episode_000112.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000104.npz",
+      "src_file": "episode_000113.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000105.npz",
+      "src_file": "episode_000114.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000106.npz",
+      "src_file": "episode_000115.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000107.npz",
+      "src_file": "episode_000116.npz",
+      "episode_len": 65
+    },
+    {
+      "file": "episode_000108.npz",
+      "src_file": "episode_000118.npz",
+      "episode_len": 284
+    },
+    {
+      "file": "episode_000109.npz",
+      "src_file": "episode_000119.npz",
+      "episode_len": 85
+    },
+    {
+      "file": "episode_000110.npz",
+      "src_file": "episode_000120.npz",
+      "episode_len": 192
+    },
+    {
+      "file": "episode_000111.npz",
+      "src_file": "episode_000122.npz",
+      "episode_len": 63
+    },
+    {
+      "file": "episode_000112.npz",
+      "src_file": "episode_000123.npz",
+      "episode_len": 87
+    },
+    {
+      "file": "episode_000113.npz",
+      "src_file": "episode_000124.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000114.npz",
+      "src_file": "episode_000125.npz",
+      "episode_len": 279
+    },
+    {
+      "file": "episode_000115.npz",
+      "src_file": "episode_000126.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000116.npz",
+      "src_file": "episode_000127.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000117.npz",
+      "src_file": "episode_000128.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000118.npz",
+      "src_file": "episode_000130.npz",
+      "episode_len": 283
+    },
+    {
+      "file": "episode_000119.npz",
+      "src_file": "episode_000131.npz",
+      "episode_len": 287
+    },
+    {
+      "file": "episode_000120.npz",
+      "src_file": "episode_000132.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000121.npz",
+      "src_file": "episode_000133.npz",
+      "episode_len": 287
+    },
+    {
+      "file": "episode_000122.npz",
+      "src_file": "episode_000134.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000123.npz",
+      "src_file": "episode_000135.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000124.npz",
+      "src_file": "episode_000138.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000125.npz",
+      "src_file": "episode_000139.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000126.npz",
+      "src_file": "episode_000140.npz",
+      "episode_len": 67
+    },
+    {
+      "file": "episode_000127.npz",
+      "src_file": "episode_000141.npz",
+      "episode_len": 276
+    },
+    {
+      "file": "episode_000128.npz",
+      "src_file": "episode_000142.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000129.npz",
+      "src_file": "episode_000143.npz",
+      "episode_len": 65
+    },
+    {
+      "file": "episode_000130.npz",
+      "src_file": "episode_000144.npz",
+      "episode_len": 273
+    },
+    {
+      "file": "episode_000131.npz",
+      "src_file": "episode_000145.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000132.npz",
+      "src_file": "episode_000146.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000133.npz",
+      "src_file": "episode_000147.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000134.npz",
+      "src_file": "episode_000148.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000135.npz",
+      "src_file": "episode_000149.npz",
+      "episode_len": 289
+    },
+    {
+      "file": "episode_000136.npz",
+      "src_file": "episode_000150.npz",
+      "episode_len": 85
+    },
+    {
+      "file": "episode_000137.npz",
+      "src_file": "episode_000151.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000138.npz",
+      "src_file": "episode_000152.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000139.npz",
+      "src_file": "episode_000153.npz",
+      "episode_len": 261
+    },
+    {
+      "file": "episode_000140.npz",
+      "src_file": "episode_000154.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000141.npz",
+      "src_file": "episode_000155.npz",
+      "episode_len": 288
+    },
+    {
+      "file": "episode_000142.npz",
+      "src_file": "episode_000156.npz",
+      "episode_len": 89
+    },
+    {
+      "file": "episode_000143.npz",
+      "src_file": "episode_000157.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000144.npz",
+      "src_file": "episode_000158.npz",
+      "episode_len": 59
+    },
+    {
+      "file": "episode_000145.npz",
+      "src_file": "episode_000160.npz",
+      "episode_len": 63
+    },
+    {
+      "file": "episode_000146.npz",
+      "src_file": "episode_000161.npz",
+      "episode_len": 66
+    },
+    {
+      "file": "episode_000147.npz",
+      "src_file": "episode_000162.npz",
+      "episode_len": 290
+    },
+    {
+      "file": "episode_000148.npz",
+      "src_file": "episode_000163.npz",
+      "episode_len": 290
+    },
+    {
+      "file": "episode_000149.npz",
+      "src_file": "episode_000164.npz",
+      "episode_len": 284
+    },
+    {
+      "file": "episode_000150.npz",
+      "src_file": "episode_000166.npz",
+      "episode_len": 58
+    },
+    {
+      "file": "episode_000151.npz",
+      "src_file": "episode_000167.npz",
+      "episode_len": 84
+    },
+    {
+      "file": "episode_000152.npz",
+      "src_file": "episode_000168.npz",
+      "episode_len": 288
+    },
+    {
+      "file": "episode_000153.npz",
+      "src_file": "episode_000169.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000154.npz",
+      "src_file": "episode_000170.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000155.npz",
+      "src_file": "episode_000171.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000156.npz",
+      "src_file": "episode_000172.npz",
+      "episode_len": 85
+    },
+    {
+      "file": "episode_000157.npz",
+      "src_file": "episode_000173.npz",
+      "episode_len": 288
+    },
+    {
+      "file": "episode_000158.npz",
+      "src_file": "episode_000174.npz",
+      "episode_len": 55
+    },
+    {
+      "file": "episode_000159.npz",
+      "src_file": "episode_000175.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000160.npz",
+      "src_file": "episode_000177.npz",
+      "episode_len": 286
+    },
+    {
+      "file": "episode_000161.npz",
+      "src_file": "episode_000178.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000162.npz",
+      "src_file": "episode_000179.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000163.npz",
+      "src_file": "episode_000180.npz",
+      "episode_len": 73
+    },
+    {
+      "file": "episode_000164.npz",
+      "src_file": "episode_000181.npz",
+      "episode_len": 63
+    },
+    {
+      "file": "episode_000165.npz",
+      "src_file": "episode_000182.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000166.npz",
+      "src_file": "episode_000183.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000167.npz",
+      "src_file": "episode_000184.npz",
+      "episode_len": 57
+    },
+    {
+      "file": "episode_000168.npz",
+      "src_file": "episode_000185.npz",
+      "episode_len": 65
+    },
+    {
+      "file": "episode_000169.npz",
+      "src_file": "episode_000186.npz",
+      "episode_len": 66
+    },
+    {
+      "file": "episode_000170.npz",
+      "src_file": "episode_000187.npz",
+      "episode_len": 275
+    },
+    {
+      "file": "episode_000171.npz",
+      "src_file": "episode_000188.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000172.npz",
+      "src_file": "episode_000189.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000173.npz",
+      "src_file": "episode_000190.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000174.npz",
+      "src_file": "episode_000192.npz",
+      "episode_len": 289
+    },
+    {
+      "file": "episode_000175.npz",
+      "src_file": "episode_000193.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000176.npz",
+      "src_file": "episode_000194.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000177.npz",
+      "src_file": "episode_000195.npz",
+      "episode_len": 58
+    },
+    {
+      "file": "episode_000178.npz",
+      "src_file": "episode_000196.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000179.npz",
+      "src_file": "episode_000197.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000180.npz",
+      "src_file": "episode_000198.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000181.npz",
+      "src_file": "episode_000199.npz",
+      "episode_len": 64
+    },
+    {
+      "file": "episode_000182.npz",
+      "src_file": "episode_000200.npz",
+      "episode_len": 283
+    },
+    {
+      "file": "episode_000183.npz",
+      "src_file": "episode_000201.npz",
+      "episode_len": 66
+    },
+    {
+      "file": "episode_000184.npz",
+      "src_file": "episode_000202.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000185.npz",
+      "src_file": "episode_000203.npz",
+      "episode_len": 63
+    },
+    {
+      "file": "episode_000186.npz",
+      "src_file": "episode_000204.npz",
+      "episode_len": 64
+    },
+    {
+      "file": "episode_000187.npz",
+      "src_file": "episode_000205.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000188.npz",
+      "src_file": "episode_000206.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000189.npz",
+      "src_file": "episode_000207.npz",
+      "episode_len": 283
+    },
+    {
+      "file": "episode_000190.npz",
+      "src_file": "episode_000208.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000191.npz",
+      "src_file": "episode_000210.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000192.npz",
+      "src_file": "episode_000211.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000193.npz",
+      "src_file": "episode_000212.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000194.npz",
+      "src_file": "episode_000213.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000195.npz",
+      "src_file": "episode_000214.npz",
+      "episode_len": 290
+    },
+    {
+      "file": "episode_000196.npz",
+      "src_file": "episode_000215.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000197.npz",
+      "src_file": "episode_000216.npz",
+      "episode_len": 280
+    },
+    {
+      "file": "episode_000198.npz",
+      "src_file": "episode_000218.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000199.npz",
+      "src_file": "episode_000219.npz",
+      "episode_len": 64
+    },
+    {
+      "file": "episode_000200.npz",
+      "src_file": "episode_000220.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000201.npz",
+      "src_file": "episode_000221.npz",
+      "episode_len": 86
+    },
+    {
+      "file": "episode_000202.npz",
+      "src_file": "episode_000222.npz",
+      "episode_len": 64
+    },
+    {
+      "file": "episode_000203.npz",
+      "src_file": "episode_000223.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000204.npz",
+      "src_file": "episode_000224.npz",
+      "episode_len": 248
+    },
+    {
+      "file": "episode_000205.npz",
+      "src_file": "episode_000225.npz",
+      "episode_len": 68
+    },
+    {
+      "file": "episode_000206.npz",
+      "src_file": "episode_000226.npz",
+      "episode_len": 287
+    },
+    {
+      "file": "episode_000207.npz",
+      "src_file": "episode_000228.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000208.npz",
+      "src_file": "episode_000229.npz",
+      "episode_len": 287
+    },
+    {
+      "file": "episode_000209.npz",
+      "src_file": "episode_000230.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000210.npz",
+      "src_file": "episode_000231.npz",
+      "episode_len": 72
+    },
+    {
+      "file": "episode_000211.npz",
+      "src_file": "episode_000232.npz",
+      "episode_len": 86
+    },
+    {
+      "file": "episode_000212.npz",
+      "src_file": "episode_000234.npz",
+      "episode_len": 73
+    },
+    {
+      "file": "episode_000213.npz",
+      "src_file": "episode_000235.npz",
+      "episode_len": 276
+    },
+    {
+      "file": "episode_000214.npz",
+      "src_file": "episode_000236.npz",
+      "episode_len": 65
+    },
+    {
+      "file": "episode_000215.npz",
+      "src_file": "episode_000237.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000216.npz",
+      "src_file": "episode_000238.npz",
+      "episode_len": 283
+    },
+    {
+      "file": "episode_000217.npz",
+      "src_file": "episode_000240.npz",
+      "episode_len": 78
+    },
+    {
+      "file": "episode_000218.npz",
+      "src_file": "episode_000241.npz",
+      "episode_len": 59
+    },
+    {
+      "file": "episode_000219.npz",
+      "src_file": "episode_000242.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000220.npz",
+      "src_file": "episode_000243.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000221.npz",
+      "src_file": "episode_000244.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000222.npz",
+      "src_file": "episode_000245.npz",
+      "episode_len": 77
+    },
+    {
+      "file": "episode_000223.npz",
+      "src_file": "episode_000246.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000224.npz",
+      "src_file": "episode_000247.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000225.npz",
+      "src_file": "episode_000248.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000226.npz",
+      "src_file": "episode_000249.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000227.npz",
+      "src_file": "episode_000250.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000228.npz",
+      "src_file": "episode_000251.npz",
+      "episode_len": 64
+    },
+    {
+      "file": "episode_000229.npz",
+      "src_file": "episode_000253.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000230.npz",
+      "src_file": "episode_000254.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000231.npz",
+      "src_file": "episode_000255.npz",
+      "episode_len": 275
+    },
+    {
+      "file": "episode_000232.npz",
+      "src_file": "episode_000256.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000233.npz",
+      "src_file": "episode_000257.npz",
+      "episode_len": 91
+    },
+    {
+      "file": "episode_000234.npz",
+      "src_file": "episode_000258.npz",
+      "episode_len": 75
+    },
+    {
+      "file": "episode_000235.npz",
+      "src_file": "episode_000259.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000236.npz",
+      "src_file": "episode_000260.npz",
+      "episode_len": 280
+    },
+    {
+      "file": "episode_000237.npz",
+      "src_file": "episode_000261.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000238.npz",
+      "src_file": "episode_000262.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000239.npz",
+      "src_file": "episode_000263.npz",
+      "episode_len": 92
+    },
+    {
+      "file": "episode_000240.npz",
+      "src_file": "episode_000264.npz",
+      "episode_len": 63
+    },
+    {
+      "file": "episode_000241.npz",
+      "src_file": "episode_000265.npz",
+      "episode_len": 276
+    },
+    {
+      "file": "episode_000242.npz",
+      "src_file": "episode_000267.npz",
+      "episode_len": 81
+    },
+    {
+      "file": "episode_000243.npz",
+      "src_file": "episode_000268.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000244.npz",
+      "src_file": "episode_000269.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000245.npz",
+      "src_file": "episode_000270.npz",
+      "episode_len": 83
+    },
+    {
+      "file": "episode_000246.npz",
+      "src_file": "episode_000271.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000247.npz",
+      "src_file": "episode_000272.npz",
+      "episode_len": 280
+    },
+    {
+      "file": "episode_000248.npz",
+      "src_file": "episode_000273.npz",
+      "episode_len": 65
+    },
+    {
+      "file": "episode_000249.npz",
+      "src_file": "episode_000274.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000250.npz",
+      "src_file": "episode_000275.npz",
+      "episode_len": 285
+    },
+    {
+      "file": "episode_000251.npz",
+      "src_file": "episode_000277.npz",
+      "episode_len": 61
+    },
+    {
+      "file": "episode_000252.npz",
+      "src_file": "episode_000278.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000253.npz",
+      "src_file": "episode_000279.npz",
+      "episode_len": 282
+    },
+    {
+      "file": "episode_000254.npz",
+      "src_file": "episode_000280.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000255.npz",
+      "src_file": "episode_000281.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000256.npz",
+      "src_file": "episode_000282.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000257.npz",
+      "src_file": "episode_000283.npz",
+      "episode_len": 79
+    },
+    {
+      "file": "episode_000258.npz",
+      "src_file": "episode_000284.npz",
+      "episode_len": 80
+    },
+    {
+      "file": "episode_000259.npz",
+      "src_file": "episode_000285.npz",
+      "episode_len": 76
+    },
+    {
+      "file": "episode_000260.npz",
+      "src_file": "episode_000286.npz",
+      "episode_len": 69
+    },
+    {
+      "file": "episode_000261.npz",
+      "src_file": "episode_000287.npz",
+      "episode_len": 82
+    },
+    {
+      "file": "episode_000262.npz",
+      "src_file": "episode_000288.npz",
+      "episode_len": 74
+    },
+    {
+      "file": "episode_000263.npz",
+      "src_file": "episode_000289.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000264.npz",
+      "src_file": "episode_000290.npz",
+      "episode_len": 277
+    },
+    {
+      "file": "episode_000265.npz",
+      "src_file": "episode_000291.npz",
+      "episode_len": 281
+    },
+    {
+      "file": "episode_000266.npz",
+      "src_file": "episode_000292.npz",
+      "episode_len": 71
+    },
+    {
+      "file": "episode_000267.npz",
+      "src_file": "episode_000293.npz",
+      "episode_len": 70
+    },
+    {
+      "file": "episode_000268.npz",
+      "src_file": "episode_000294.npz",
+      "episode_len": 60
+    },
+    {
+      "file": "episode_000269.npz",
+      "src_file": "episode_000295.npz",
+      "episode_len": 88
+    },
+    {
+      "file": "episode_000270.npz",
+      "src_file": "episode_000296.npz",
+      "episode_len": 62
+    },
+    {
+      "file": "episode_000271.npz",
+      "src_file": "episode_000297.npz",
+      "episode_len": 287
+    },
+    {
+      "file": "episode_000272.npz",
+      "src_file": "episode_000298.npz",
+      "episode_len": 85
+    },
+    {
+      "file": "episode_000273.npz",
+      "src_file": "episode_000299.npz",
+      "episode_len": 82
+    }
+  ]
+}
