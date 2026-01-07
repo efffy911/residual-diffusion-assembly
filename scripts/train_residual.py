@@ -6,9 +6,13 @@ from dataclasses import dataclass
 from typing import Callable, Any, Optional, Tuple
 
 import numpy as np
+import torch # 确保导入torch，虽然通常sb3里有
 
 from stable_baselines3 import SAC
-from stable_baselines3.common.vec_env import DummyVecEnv
+# ❌ 原来的：from stable_baselines3.common.vec_env import DummyVecEnv
+# ✅ 修改后：引入并行环境工具
+from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
+from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.callbacks import BaseCallback, CallbackList
 
@@ -26,7 +30,7 @@ ENV_CFG = ResidualConfig(
     n_obs_steps=2,
 
     # residual
-    delta_scale=0.005,
+    delta_scale=0.02,
     freeze_gripper=True,
     gripper_dim=None,   # None -> env 内自动推断为最后一维
 
@@ -36,22 +40,22 @@ ENV_CFG = ResidualConfig(
     warmup_steps=3_000,
     ramp_steps=2_000,
     seed=0,
-    train_seed_pool=[12345, 54321, 11111, 22222, 33333, 44444, 55555, 66666],
-)
+    train_seed_pool=None,
+    )
 
 
 # ✅ 2) 训练层 cfg：只管 SAC / eval / 保存
 @dataclass
 class TrainCfg:
     # --- training ---
-    timesteps: int = 50_000
+    timesteps: int = 200_000
     save_dir: str = "./data/residual_sac_runs/run_0"
     render: bool = False  # training should be False
 
     # --- eval ---
-    eval_every_steps: int = 5_000
-    n_eval_episodes: int = 50
-    eval_seed: int = 12345
+    eval_every_steps: int = 25_000
+    n_eval_episodes: int = 20
+    eval_seed: int = 54321
     strict_success_end: bool = False
     save_with_step: bool = True
 
@@ -63,7 +67,7 @@ class TrainCfg:
     tau: float = 0.005
     gamma: float = 0.99
     train_freq: int = 1
-    gradient_steps: int = 1
+    gradient_steps: int = 4
     learning_starts: int = 10_000
     ent_coef: str = "auto"
     verbose: int = 2
@@ -126,7 +130,7 @@ class ResidualEvalCallback(BaseCallback):
         n_eval_episodes: int,
         save_dir: str,
         best_name: str = "best_sac_residual",
-        eval_seed: int = 12345,
+        eval_seed: int = 54321,
         eval_seed_list: Optional[list[int]] = None,
         strict_success_end: bool = False,
         save_with_step: bool = False,
@@ -140,7 +144,7 @@ class ResidualEvalCallback(BaseCallback):
         self.best_name = best_name
 
         self.eval_seed = int(eval_seed)
-        self.eval_seed_list = eval_seed_list  # e.g., [12345, 54321]
+        self.eval_seed_list = eval_seed_list
         self.strict_success_end = bool(strict_success_end)
         self.save_with_step = bool(save_with_step)
 
@@ -177,10 +181,6 @@ class ResidualEvalCallback(BaseCallback):
     def _run_eval(self) -> Tuple[float, float]:
         """
         Eval over multiple seed0 blocks to reduce overfitting to a single seed range.
-
-        If self.eval_seed_list is provided (e.g. [12345, 54321]),
-        we will run n_eval_episodes episodes for EACH seed0 in the list.
-        Total episodes = n_eval_episodes * len(eval_seed_list).
 
         Returns:
         success_rate: mean over all episodes
@@ -278,7 +278,19 @@ def main():
     os.makedirs(CFG.save_dir, exist_ok=True)
 
     # -------- train env --------
-    env = DummyVecEnv([make_env(ENV_CFG, render=CFG.render)])
+    n_envs = 4 
+
+    print(f"[INFO] Starting {n_envs} parallel environments...")
+    
+    # 使用 make_vec_env 自动创建多个进程
+    env = make_vec_env(
+        make_env(ENV_CFG, render=CFG.render), # 传入我们定义的单个环境构造函数
+        n_envs=n_envs,
+        seed=ENV_CFG.seed,        # 基础随机种子
+        vec_env_cls=SubprocVecEnv, # 强制使用多进程
+        # ⚠️ 关键点：必须使用 'spawn' 启动方式，否则 CUDA 会报错
+        vec_env_kwargs={"start_method": "spawn"} 
+    )
 
     # -------- eval env factory (NEW env each time) --------
     def make_eval_env():
@@ -325,14 +337,19 @@ def main():
 
     # -------- callbacks --------
     speed_cb = StepSpeedCallback(print_every=2000)
+    
+    # 平时训练用的 "轻量级" Eval
     eval_cb = ResidualEvalCallback(
         eval_env_fn=make_eval_env,
         eval_every_steps=CFG.eval_every_steps,
-        n_eval_episodes=CFG.n_eval_episodes,
+        n_eval_episodes=CFG.n_eval_episodes, # 这里现在是 10
         save_dir=CFG.save_dir,
         best_name="best_sac_residual",
-        eval_seed=CFG.eval_seed,
-        eval_seed_list=[13579, 86420],  # ✅ 新增：多 seed0
+        
+        # 【关键修改】平时只测 1 个 unseen seed，不要跑 list
+        eval_seed=76543,    
+        eval_seed_list=None,  # 设为 None，省去成倍的时间
+        
         strict_success_end=CFG.strict_success_end,
         save_with_step=CFG.save_with_step,
     )
@@ -347,6 +364,23 @@ def main():
     model.save(out_path)
     print(f"[OK] Saved LAST model to: {out_path}.zip")
 
+    print("\n[FINAL CHECK] Starting heavy evaluation on multiple seeds...")
+    # 手动创建一个 "大考" 的 Callback 或者直接复用逻辑
+    final_eval = ResidualEvalCallback(
+        eval_env_fn=make_eval_env,
+        eval_every_steps=0,         # 不会被 step 触发
+        n_eval_episodes=50,         # 【大考】跑 50 次
+        save_dir=CFG.save_dir,
+        best_name="final_validated",
+        eval_seed=54321,
+        # 【大考】覆盖多个没见过的 Seed，确保真正的泛化性
+        eval_seed_list=[13579, 86420, 99999], 
+        verbose=1
+    )
+    # 借用它的 _run_eval 方法
+    final_eval.model = model  # 注入模型
+    succ, steps = final_eval._run_eval()
+    print(f"[FINAL RESULT] Success: {succ:.3f}, Mean Steps: {steps:.1f}")
     env.close()
 
 

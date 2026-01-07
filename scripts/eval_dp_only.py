@@ -14,7 +14,7 @@ class EvalCfg:
     ckpt: str = "./diffusion_policy/data/outputs/2025.12.18/21.05.00_train_diffusion_unet_lowdim_pickplace_lowdim/checkpoints/latest.ckpt"
     device: str = "cuda:0"
     env_id: str = "FrankaPickAndPlaceSparse-v0"
-    max_steps: int = 150
+    max_steps: int = 300
     n_obs_steps: int = 2
 
     # DP rollout knobs (match training)
@@ -33,7 +33,7 @@ class EvalCfg:
 
     # ===== eval =====
     n_eval_episodes: int = 100
-    eval_seed: int = 54321
+    eval_seed: int = 77777
     render: bool = False
     strict_success_end: bool = False   # False: success if ever succeeded during episode
     print_each_episode: bool = True    # set False if you want clean output

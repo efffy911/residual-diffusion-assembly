@@ -13,18 +13,18 @@ from scripts.residual_env import ResidualPickPlaceEnv, ResidualConfig
 @dataclass
 class EvalCfg:
     # ===== model =====
-    # ✅ 用 last 模型评估（支持带/不带 .zip）
-    model_path: str = "./data/residual_sac_runs/run_0/best_sac_residual.zip"
+    # ✅ 用 best 模型评估（支持带/不带 .zip）
+    model_path: str = "./data/residual_sac_runs/run_0_finetune/best_finetuned.zip"
 
     # ===== env / DP checkpoint (match training) =====
     ckpt: str = "./diffusion_policy/data/outputs/2025.12.18/21.05.00_train_diffusion_unet_lowdim_pickplace_lowdim/checkpoints/latest.ckpt"
     device: str = "cuda:0"
     env_id: str = "FrankaPickAndPlaceSparse-v0"
-    max_steps: int = 150
+    max_steps: int = 300
     n_obs_steps: int = 2
 
     # residual params (should match training; gripper_dim None -> infer last dim)
-    delta_scale: float = 0.005
+    delta_scale: float = 0.02
     freeze_gripper: bool = True
     gripper_dim: Optional[int] = None
 
@@ -38,7 +38,7 @@ class EvalCfg:
 
     # ===== eval =====
     n_eval_episodes: int = 100
-    eval_seed: int = 12345
+    eval_seed: int = 77777
     render: bool = False
     strict_success_end: bool = False   # False: 任意时刻成功都算成功
     print_each_episode: bool = True

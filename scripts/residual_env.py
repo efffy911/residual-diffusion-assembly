@@ -32,15 +32,39 @@ def force_time_limit(env, max_episode_steps: int):
 
 
 def flat_obs(obs: Any) -> np.ndarray:
-    """与你 runner 里的 _flat_obs 一致：observation + achieved_goal + desired_goal"""
     if isinstance(obs, dict):
         parts = []
+        # 1. 原始部分
         for k in ["observation", "achieved_goal", "desired_goal"]:
             if k in obs:
                 parts.append(np.asarray(obs[k], dtype=np.float32).reshape(-1))
+        
+        # -----------------------------------------------------------
+        # 【核心修改】加入两组相对向量，覆盖 Pick 和 Place 全流程
+        # -----------------------------------------------------------
+        if "achieved_goal" in obs and "desired_goal" in obs and "observation" in obs:
+            ag = np.asarray(obs["achieved_goal"], dtype=np.float32).reshape(-1)
+            dg = np.asarray(obs["desired_goal"], dtype=np.float32).reshape(-1)
+            
+            # 假设 observation 的前3维是手爪坐标 (x,y,z)
+            # 这是一个非常标准的设定，如果你的环境特殊，请确认一下
+            eef_pos = np.asarray(obs["observation"], dtype=np.float32).reshape(-1)[:3]
+
+            # 向量1: 物体 -> 目标 (管 Place，解决运送偏差)
+            vec_place = dg - ag
+            
+            # 向量2: 手 -> 物体 (管 Pick，解决抓取偏差)
+            # 这就是你缺的那块拼图！有了它，Agent 才知道怎么把手挪过去抓
+            vec_pick = ag - eef_pos 
+            
+            parts.append(vec_place)
+            parts.append(vec_pick)
+            # -----------------------------------------------------------
+
         if not parts:
             raise ValueError(f"Empty obs dict keys={list(obs.keys())}")
         return np.concatenate(parts, axis=0)
+    
     return np.asarray(obs, dtype=np.float32).reshape(-1)
 
 
@@ -148,7 +172,8 @@ class ResidualPickPlaceEnv(gym.Env):
     def _dp_act(self, obs_hist: np.ndarray) -> np.ndarray:
         """
         Diffusion policy action with sequence caching.
-        One DP inference produces a sequence of actions; reuse them across steps.
+        【修正注】修复了 shape 报错。DP 需要 (Batch, T, D) 输入，
+        所以切片后不能 flatten，要保持 (T, D)。
         """
         # 如果缓存还有动作，直接用
         if self._dp_action_cache is not None and self._dp_action_idx < len(self._dp_action_cache):
@@ -156,12 +181,25 @@ class ResidualPickPlaceEnv(gym.Env):
             self._dp_action_idx += 1
             return a
 
-        # 否则，重新跑一次 DP 推理
-        obs_in = obs_hist.astype(np.float32)
+        # ---------------------------------------------------------
+        # 1. Reshape 还原成 (n_steps, obs_dim_new)
+        # obs_hist 是平铺的，先还原
+        obs_seq = obs_hist.reshape(self.cfg.n_obs_steps, -1)
+
+        # 2. 切片：去掉最后 6 维 (我们新增的 relative goal)
+        # DP 原始模型没见过这 6 维，必须切掉
+        obs_seq_dp = obs_seq[:, :-6]
+
+        # 3. 【关键修正】这里不要 flatten()！
+        # DP Policy 期待的输入是 (Batch, Time, Dim)
+        # 这里我们要保留 (Time, Dim)，加上后面的 [None, ...] 就会变成 (1, Time, Dim)
+        obs_in = obs_seq_dp.astype(np.float32)
+        # ---------------------------------------------------------
 
         with torch.no_grad():
-            # 可选：fp16 自动混合精度（V100 很有用）
+            # 可选：fp16 自动混合精度
             with amp.autocast(device_type="cuda", enabled=self.torch_device.type == "cuda"):
+                # obs_in[None, ...] 会把 (T, D) 变成 (1, T, D)，满足 DP 要求
                 if hasattr(self.dp_policy, "predict_action"):
                     out = self.dp_policy.predict_action({"obs": obs_in[None, ...]})
                     a = out["action"]
@@ -188,7 +226,6 @@ class ResidualPickPlaceEnv(gym.Env):
         self._dp_action_idx = 1
         return self._dp_action_cache[0]
 
-
     def _compose_action(self, a_dp: np.ndarray, delta: np.ndarray) -> np.ndarray:
         # delta ∈ [-1,1] -> scale
         a = a_dp + self.cfg.delta_scale * delta
@@ -205,42 +242,37 @@ class ResidualPickPlaceEnv(gym.Env):
     def _get_obs(self) -> np.ndarray:
         return self.obs_hist.reshape(-1).astype(np.float32)
 
-    def _compute_reward(
-        self,
-        obs: Any,
-        info: Dict[str, Any],
-        delta: np.ndarray
-    ) -> float:
+    def _compute_reward(self, obs: Any, info: Dict[str, Any], delta: np.ndarray) -> float:
         """
-        Residual RL reward (stable version)
-
-        目标：
-        - 保持 DP 的成功率（success bonus）
-        - 给 SAC 连续的“接近目标”梯度（distance term）
-        - 强约束 residual 不要乱改动作（delta L2）
-        - 轻微压步数（step penalty）
+        Residual RL reward (Generalization Tuned)
+        
+        修改逻辑：
+        1. 降低 distance 权重：防止 Residual Agent 破坏 Diffusion Policy 的自然轨迹。
+        2. 增加 delta 正则惩罚：鼓励 "Lazy Agent"，非必要不修改动作，防止过拟合。
         """
 
-        # -------- 1. step penalty（压步数，权重不要太大） --------
+        # -------- 1. Step Penalty (时间成本) --------
+        # 保持小一点，鼓励尽快完成，但不要让它急得乱撞
         step_penalty = -0.01
 
-        # -------- 2. 距离项：给连续梯度，防止 policy drift --------
-        # achieved_goal / desired_goal 是 Gym GoalEnv 的标准字段
+        # -------- 2. 距离项 (Guidance) --------
         ag = obs["achieved_goal"]
         dg = obs["desired_goal"]
         dist = float(np.linalg.norm(ag - dg))
 
-        # 距离项权重：1.0 是一个非常稳的起点
-        goal_term = -1.0 * dist
+        # 【关键修改】降低权重 (原 -1.0 -> -0.5 或 -0.25)
+        # 只要能提供梯度方向即可，不要让它主导 Reward，
+        # 否则 Agent 会试图为了缩短 1mm 距离而破坏抓取姿态。
+        goal_term = -0.5 * dist
 
-        # -------- 3. success bonus（主导成功） --------
+        # -------- 3. Success Bonus (稀疏奖励 - 核心目标) --------
+        # 这是最重要的信号，只有完成了才给大奖
         success_bonus = 10.0 if info.get("is_success", False) else 0.0
 
-        # -------- 4. residual 正则（关键：防止后期越改越离谱） --------
-        # 比你原来 -0.001 强 10 倍
-        delta_reg = -0.01 * float(np.sum(np.square(delta)))
+        # -------- 4. Residual Regularization (正则项) --------
+        delta_reg = -0.001 * float(np.sum(np.square(delta)))
 
-        # -------- total --------
+        # -------- Total --------
         reward = step_penalty + goal_term + success_bonus + delta_reg
         return reward
 
@@ -269,9 +301,11 @@ class ResidualPickPlaceEnv(gym.Env):
     def step(self, action: np.ndarray):
         # action is delta from SB3
         delta = np.asarray(action, dtype=np.float32)
+        
         # warmup：前 N step 不施加 residual（强烈建议）
         warmup = int(self.cfg.warmup_steps)
         ramp = int(self.cfg.ramp_steps)
+        
         # residual gate: 0 -> 1 逐渐放开
         if self.total_steps < warmup:
             scale = 0.0
@@ -291,10 +325,29 @@ class ResidualPickPlaceEnv(gym.Env):
         if norm > max_norm:
             delta *= (max_norm / (norm + 1e-8))
 
+        # 获取 DP 动作
         a_dp = self._dp_act(self.obs_hist)
         self.last_dp_action = a_dp.copy()
+        
+        # 合成最终动作 (Final Action = DP + Residual)
         a = self._compose_action(a_dp, delta)
 
+        # =========================================================================
+        # ⚠️⚠️⚠️ 鲁棒性测试专用区域 (Robustness Test Zone) ⚠️⚠️⚠️
+        # =========================================================================
+        # 【说明】：以下 3 行代码仅在运行 eval_robustness (加噪测试) 时取消注释！
+        # 【警告】：正常训练 (train) 或普通测试 (eval) 时，必须将其注释掉，否则无法收敛！
+        # -------------------------------------------------------------------------
+        
+        # noise_scale = 0.1  # 噪声强度：0.05(轻微), 0.1(显著), 0.2(剧烈)
+        # noise = np.random.normal(loc=0.0, scale=noise_scale, size=a.shape)
+        # a = a + noise
+        
+        # =========================================================================
+        # ⚠️⚠️⚠️ 区域结束 ⚠️⚠️⚠️
+        # =========================================================================
+
+        # 执行动作
         obs, env_reward, terminated, truncated, info = self.env.step(a)
         self.t += 1
         self.total_steps += 1
