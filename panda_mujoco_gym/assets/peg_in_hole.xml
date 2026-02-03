@@ -1,0 +1,62 @@
+<mujoco model="panda scene">
+  <compiler angle="radian" meshdir="./meshes/" autolimits="true"/>
+
+  <option integrator="Euler" noslip_iterations="3" timestep="0.002" cone="pyramidal">
+    <flag multiccd="enable" warmstart="enable"/>
+  </option>
+
+  <include file="panda_mocap.xml"/>
+
+  <statistic center="0.3 0 0.4" extent="1"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    
+    <material name="hole_mat" rgba="0.8 0.8 0.8 1" reflectance="0.5"/>
+    <material name="peg_mat" rgba="0.2 0.8 0.2 1" reflectance="0.1"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <camera name="watching" pos="1.669 -1.154 1.019" xyaxes="0.644 0.765 0.000 -0.250 0.210 0.945"/>
+
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+
+    <body name="object" pos="0.3 0.0 0.05">
+        <joint name="obj_joint" type="free" damping="1.0"/>
+        
+        <geom name="obj_geom" type="cylinder" size="0.015 0.05" material="peg_mat" 
+              mass="0.1" friction="2.0 0.005 0.0001" 
+              condim="6" margin="0.002"/>
+              
+        <site name="obj_site" pos="0 0 0" size="0.01" type="sphere" rgba="0 0 0 0"/>
+    </body>
+
+    <site name="target" pos="0 0 -10" size="0.01" rgba="0 0 0 0"/>
+    <body name="hole_base" pos="0.5 0.0 0.0" mocap="true">
+        <site name="hole_target" pos="0 0 0.05" size="0.02 0.02 0.02" rgba="1 0 0 0.3" type="sphere"/>
+
+        <geom name="wall_left" pos="-0.027 0 0.05" size="0.0110 0.05 0.05" type="box" material="hole_mat" 
+          mass="1000" friction="1.5 0.005 0.0001" solimp="0.95 0.99 0.001" solref="0.004 1"/>
+        
+        <geom name="wall_right" pos="0.027 0 0.05" size="0.0110 0.05 0.05" type="box" material="hole_mat" 
+              mass="1000" friction="1.5 0.005 0.0001" solimp="0.95 0.99 0.001" solref="0.004 1"/>
+        
+        <geom name="wall_back" pos="0 0.027 0.05" size="0.05 0.0110 0.05" type="box" material="hole_mat" 
+              mass="1000" friction="1.5 0.005 0.0001" solimp="0.95 0.99 0.001" solref="0.004 1"/>
+        
+        <geom name="wall_front" pos="0 -0.027 0.05" size="0.05 0.0110 0.05" type="box" material="hole_mat" 
+              mass="1000" friction="1.5 0.005 0.0001" solimp="0.95 0.99 0.001" solref="0.004 1"/>
+    </body>
+
+  </worldbody>
+  
+</mujoco>

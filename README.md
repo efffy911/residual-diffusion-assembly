@@ -1,1 +1,1 @@
-# dp_mujoco_pickplace
+# residual-diffusion-assembly

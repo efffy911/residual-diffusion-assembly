@@ -1,6 +1,0 @@
-pyproject.toml
-dp_mujoco_pickplace.egg-info/PKG-INFO
-dp_mujoco_pickplace.egg-info/SOURCES.txt
-dp_mujoco_pickplace.egg-info/dependency_links.txt
-dp_mujoco_pickplace.egg-info/top_level.txt
-panda_mujoco_gym/__init__.py

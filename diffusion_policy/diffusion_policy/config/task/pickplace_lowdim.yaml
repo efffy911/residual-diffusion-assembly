@@ -1,0 +1,33 @@
+# diffusion_policy/config/task/pickplace_lowdim.yaml
+
+name: pickplace_lowdim
+
+# ---- dataset ----
+dataset:
+  _target_: diffusion_policy.dataset.pickplace_dataset.PickPlaceLowdimDataset
+  zarr_path: ../data/pickplace/pickplace_replay.zarr
+  horizon: 16
+  n_obs_steps: 2
+  pad_before: 0
+  pad_after: 0
+  train: true
+  val_ratio: 0.1
+  seed: 0
+
+# ---- env runner ----
+env_runner:
+  _target_: diffusion_policy.env_runner.pickplace_runner.PickPlaceRunner
+  env_id: FrankaPickAndPlaceSparse-v0
+  n_eval_episodes: 50
+  max_steps: 150
+  render: false
+  n_obs_steps: 2
+  horizon: 16
+  seed: 0
+
+# 下面这些通常会在 method 配置里覆盖（diffusion_policy_cnn / transformer 等）
+# 但给一个基本值，避免某些版本的 train.py 访问不到
+
+obs_dim: 25
+action_dim: 4
+keypoint_dim: 0

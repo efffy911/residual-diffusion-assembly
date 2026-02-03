@@ -1,0 +1,44 @@
+name: peg_in_hole
+
+# 🟢 [修改1] 定义 Zarr 文件里的图像键名
+# 我们在 convert_npz_to_zarr 里保存的是 'image' 和 'image_wrist'
+shape_meta: &shape_meta
+  # 观测空间定义
+  obs:
+    # 全局相机
+    image:
+      shape: [3, 96, 96]
+      type: rgb
+    # 🟢 [新增] 手眼相机
+    image_wrist:
+      shape: [3, 96, 96]
+      type: rgb
+    # 状态
+    state:
+      shape: [19] # 🔴 请再次确认你的 state 维度
+      type: low_dim
+  # 动作空间定义
+  action:
+    shape: [4] # 🔴 请再次确认你的 action 维度
+
+env_runner:
+  _target_: diffusion_policy.env_runner.peg_in_hole_runner.FrankaPegInHoleRunner
+  output_dir: .
+  n_test: 5
+  max_steps: 200
+  render_size: 96
+  fps: 10
+
+dataset:
+  # 保持你自定义的 Dataset 类
+  _target_: diffusion_policy.dataset.peg_in_hole_dataset.PegInHoleDataset
+  # 🟢 [修改2] 指向新的包含双相机的 Zarr 文件
+  dataset_path: ${hydra:runtime.cwd}/../data/demo_npz/peg_in_hole_demo_dual_cam_300eps_20260126_152236.zarr
+  shape_meta: *shape_meta
+  n_obs_steps: 2
+  horizon: 16
+  pad_before: 1
+  pad_after: 7
+  use_cache: True
+  seed: 42
+  val_ratio: 0.02
